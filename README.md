@@ -1,6 +1,6 @@
 # Speakers API
 
-A modern ASP.NET Core Web API for managing speaker information with full CRUD operations, built with .NET 9, Entity Framework Core, and Azure monitoring integration.
+An ASP.NET Core Web API for managing speaker information with full CRUD operations, built with .NET 9, Entity Framework Core, and Azure monitoring integration.
 
 ## Features
 
