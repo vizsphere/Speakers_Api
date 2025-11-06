@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Speakers/FileContentIndex
+/.vs/Speakers/CopilotIndices/17.14.1231.31060
+/Speakers.Api/bin/Debug/net9.0
+/Speakers.Api/obj
+/Speakers.Domain/bin/Debug/net9.0
+/Speakers.Domain/obj
+/Speakers.UnitTests/bin/Debug/net9.0
+/Speakers.UnitTests/obj
+/links.txt
