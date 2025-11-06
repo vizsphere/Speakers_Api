@@ -19,47 +19,101 @@ namespace AppSpeakers.Api.Controllers
 
         [HttpGet]
         [Route("getSpeakers")]
-        public IList<Speaker> Get()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Get()
         {
-            return _speakerService.Get();
+            _logger.LogInformation("Getting all speakers");
+            var res =  _speakerService.Get();
+            _logger.LogInformation("Retrieved {count} speakers", res.Count);
+
+            return res == null || !res.Any() ? NotFound() : Ok(res);
         }
 
         [HttpGet]
         [Route("getSpeakerById")]
-        public async Task<Speaker> GetById(string id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById(string id)
         {
-            return await _speakerService.GetById(id);
+            _logger.LogInformation("Getting speaker by ID: {id}", id);
+            var res= await _speakerService.GetById(id);
+            _logger.LogInformation("Retrieved speaker: {speakerName}", res?.Name);
+
+            return res == null ? NotFound() : Ok(res);
         }
 
         [HttpPost]
         [Route("searchSpeaker")]
-        public IEnumerable<Speaker> SearchSpeaker(string searchTerm)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult SearchSpeaker(string searchTerm)
         {
             _logger.LogInformation("Searching speaker with term: {searchTerm}", searchTerm);
+            var res = _speakerService.Search(searchTerm);
+            _logger.LogInformation("Found {count} speakers matching search term", res.Count());
 
-            return _speakerService.Search(searchTerm);
+            return res == null ? NotFound() : Ok(res);
         }
 
         [HttpPost]
         [Route("addSpeaker")]
-        public async Task<Speaker> AddSpeaker(Speaker speaker)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddSpeaker(Speaker speaker)
         {
-            return await _speakerService.AddSpeaker(speaker);
+            _logger.LogInformation("Adding new speaker: {speakerName}", speaker.Name);
+            Speaker res = new();
+            try
+            {
+                 res = await _speakerService.AddSpeaker(speaker);
+                _logger.LogInformation("Added speaker with ID: {speakerId}", res.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding speaker: {errorMessage}", ex.Message);
+            }
+            return res == null ? BadRequest() : Ok(res);
         }
 
         [HttpPost]
         [Route("updateSpeaker")]
-        public async Task<Speaker> UpdateSpeaker(Speaker speaker)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateSpeaker(Speaker speaker)
         {
-            return await _speakerService.UpdateSpeaker(speaker);
+            _logger.LogInformation("Updating speaker with ID: {speakerId}", speaker.Id);
+            Speaker res = new();
+            try
+            {
+                res = await _speakerService.UpdateSpeaker(speaker);
+                _logger.LogInformation("Updated speaker: {speakerName}", res.Name);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating speaker: {errorMessage}", ex.Message); 
+            }
+            return res == null ? BadRequest() : Ok(res);
         }
 
         [HttpPost]
         [Route("deleteSpeaker")]
-        public async Task<Speaker> DeleteSpeaker(string id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteSpeaker(string id)
         {
-            return await _speakerService.DeleteSpeaker(id);
+            Speaker res = new();
+            try
+            {
+                _logger.LogInformation("Deleting speaker with ID: {speakerId}", id);
+                res = await _speakerService.DeleteSpeaker(id);
+                _logger.LogInformation("Deleted speaker: {speakerName}", res?.Name);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting speaker: {errorMessage}", ex.Message);
+            }
+            return res == null ? BadRequest() : Ok(res);
         }
-
     }
 }
