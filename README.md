@@ -2,6 +2,8 @@
 
 An ASP.NET Core Web API for managing speaker information with full CRUD operations, built with .NET 9, Entity Framework Core, and Azure monitoring integration.
 
+https://github.com/user-attachments/assets/6d741206-d199-4a18-b5e5-3ad53841352e
+
 ## Features
 
 - **RESTful API** for speaker management (CRUD operations)
