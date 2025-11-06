@@ -134,12 +134,6 @@ POST /Speakers/deleteSpeaker?id={speakerId}
 ```
 
 
-### Key Design Patterns
-
-- **Repository Pattern** - Abstracts data access logic
-- **Dependency Injection** - Used throughout for loose coupling
-- **Generic Repository** - Reusable data access pattern
-
 ## Database
 
 The application uses Entity Framework Core with SQL Server. In development mode, the database is automatically seeded with 100 fake speakers using the Bogus library.
