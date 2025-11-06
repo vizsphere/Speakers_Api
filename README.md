@@ -66,8 +66,6 @@ The API will be available at:
 - HTTPS: `https://localhost:7070`
 - HTTP: `http://localhost:5106`
 
-In development mode, the database will be automatically created and seeded with 100 sample speakers.
-
 ## API Endpoints
 
 ### Get All Speakers
