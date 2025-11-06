@@ -1,6 +1,8 @@
 # Speakers API
 
-A modern ASP.NET Core Web API for managing speaker information with full CRUD operations, built with .NET 9, Entity Framework Core, and Azure monitoring integration.
+An ASP.NET Core Web API for managing speaker information with full CRUD operations, built with .NET 9, Entity Framework Core, and Azure monitoring integration.
+
+https://github.com/user-attachments/assets/6d741206-d199-4a18-b5e5-3ad53841352e
 
 ## Features
 
@@ -65,8 +67,6 @@ dotnet run
 The API will be available at:
 - HTTPS: `https://localhost:7070`
 - HTTP: `http://localhost:5106`
-
-In development mode, the database will be automatically created and seeded with 100 sample speakers.
 
 ## API Endpoints
 
@@ -133,12 +133,6 @@ POST /Speakers/deleteSpeaker?id={speakerId}
 └── Program.cs                    # Application startup & configuration
 ```
 
-
-### Key Design Patterns
-
-- **Repository Pattern** - Abstracts data access logic
-- **Dependency Injection** - Used throughout for loose coupling
-- **Generic Repository** - Reusable data access pattern
 
 ## Database
 
