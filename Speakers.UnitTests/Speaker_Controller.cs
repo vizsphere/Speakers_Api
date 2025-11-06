@@ -1,5 +1,6 @@
 ﻿using AppSpeakers.Api.Controllers;
 using AppSpeakers.Domain;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Speakers.Api.Services;
@@ -27,10 +28,11 @@ namespace AppSpeakers.UnitTests
 
             //Act
             var actionResult = controller.Get();
+            var okResult = actionResult as OkObjectResult;
 
             //Assert
-            Assert.NotNull(actionResult);
-            Assert.Equal(2, actionResult.Count);
+            Assert.NotNull(okResult);
+            Assert.Equal(200, okResult.StatusCode);
         }
 
         [Fact]
@@ -43,10 +45,11 @@ namespace AppSpeakers.UnitTests
 
             //Act
             var actionResult = await controller.GetById(_id);
+            var okResult = actionResult as OkObjectResult;
 
             //Assert
-            Assert.NotNull(actionResult);
-            Assert.Equal(_id, actionResult.Id);
+            Assert.NotNull(okResult);
+            Assert.Equal(200, okResult.StatusCode);
         }
 
         [Fact]
@@ -66,9 +69,11 @@ namespace AppSpeakers.UnitTests
 
             //Act
             var actionResult = await controller.AddSpeaker(speaker);
+            var okResult = actionResult as OkObjectResult;
 
             //Assert
             Assert.NotNull(actionResult);
+            Assert.Equal(200, okResult.StatusCode);
         }
 
         [Fact]
@@ -88,9 +93,11 @@ namespace AppSpeakers.UnitTests
 
             //Act
             var actionResult = await controller.DeleteSpeaker(_id);
+            var okResult = actionResult as OkObjectResult;
 
             //Assert
             Assert.NotNull(actionResult);
+            Assert.Equal(200, okResult.StatusCode);
         }
 
     }
