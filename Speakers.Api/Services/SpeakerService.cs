@@ -53,9 +53,10 @@ namespace Speakers.Api.Services
 
         public IEnumerable<Speaker> Search(string term)
         {
-            return _speakerRepository.Search(
-                p => p.Bio.ToLower().Contains(term.ToLower()) ||
-                p.Name.ToLower().Contains(p.Name.ToLower()));
+            var test =  _speakerRepository.Search(
+                p => p.Bio.ToLower().Contains(term.ToLower()));
+
+            return test;
         }
     }
 }
